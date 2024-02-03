@@ -6,6 +6,19 @@ export const getServiceTickets = () => {
 
 //export a function here that gets a ticket by id
 
-export const getServiceTicketsById = () => {
-  return fetch(_apiUrl/{id})
-};
+export const getSingleServiceTicket = (id) => new Promise((resolve, reject) => {
+  fetch(`${_apiUrl}/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(async (res) => {
+      let data;
+      if (res.ok) {
+        data = await res.json();
+        resolve(data);
+      }
+    })
+    .catch(reject);
+});
